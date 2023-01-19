@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Form, Button, FloatingLabel } from 'react-bootstrap';
 import PropTypes from 'prop-types';
@@ -18,6 +18,10 @@ export default function AuthorForm({ obj }) {
   const router = useRouter();
   const { user } = useAuth();
 
+  useEffect(() => {
+    if (obj.firebaseKey) setFormInput(obj);
+  }, [obj]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormInput((prevState) => ({
@@ -34,7 +38,7 @@ export default function AuthorForm({ obj }) {
     } else {
       const payload = { ...formInput, uid: user.uid };
       createAuthor(payload).then(() => {
-        router.push('/');
+        router.push('/authors');
       });
     }
   };
@@ -93,11 +97,15 @@ export default function AuthorForm({ obj }) {
         name="favorite"
         label="Favorite"
         checked={formInput.favorite}
-        onChange={handleChange}
+        onChange={(e) => {
+          setFormInput((prevState) => ({
+            ...prevState,
+            sale: e.target.checked,
+          }));
+        }}
       />
 
-      <Button variant="primary" type="submit">
-        Submit Author
+      <Button variant="primary" type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Author
       </Button>
     </Form>
 

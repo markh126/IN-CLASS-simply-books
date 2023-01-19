@@ -40,6 +40,7 @@ AuthorCard.propTypes = {
     last_name: PropTypes.string,
     image: PropTypes.string,
     firebaseKey: PropTypes.string,
+    favorite: PropTypes.bool,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };

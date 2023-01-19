@@ -17,10 +17,17 @@ export default function ViewAuthors() {
   }, []);
 
   return (
-    <div style={{ width: '18rem', margin: '10px' }}>
-      <img src={authorDetails.image} alt={authorDetails.email} style={{ height: '400px' }} />
-      <h2>{authorDetails.first_name} {authorDetails.last_name}</h2>
-      <h3>{authorDetails.email}</h3>
+    <div className="mt-5 d-flex flex-wrap">
+      <div className="d-flex flex-column">
+        <img src={authorDetails.image} alt={authorDetails.first_name} style={{ width: '300px' }} />
+      </div>
+      <div className="text-white ms-5 details">
+        <h2>{authorDetails.first_name} {authorDetails.last_name}
+          {authorDetails.favorite ? ' 🤍' : ''}
+        </h2>
+        Email: <a href={`mailto:${authorDetails.email}`}>{authorDetails.email}</a>
+        <hr />
+      </div>
     </div>
   );
 }
