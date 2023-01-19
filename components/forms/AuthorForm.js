@@ -100,7 +100,7 @@ export default function AuthorForm({ obj }) {
         onChange={(e) => {
           setFormInput((prevState) => ({
             ...prevState,
-            sale: e.target.checked,
+            favorite: e.target.checked,
           }));
         }}
       />
