@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Head from 'next/head';
 import { Button } from 'react-bootstrap';
 import { getBooks } from '../api/bookData';
 import { useAuth } from '../utils/context/authContext';
@@ -24,18 +25,22 @@ function Home() {
   }, []);
 
   return (
-    <div className="text-center my-4">
-      <Link href="/book/new" passHref>
-        <Button>Add A Book</Button>
-      </Link>
-      <div className="d-flex flex-wrap">
-        {/* TODO: map over books here using BookCard component */}
-        {books.map((book) => (
-          <BookCard key={book.firebaseKey} bookObj={book} onUpdate={getAllTheBooks} />
-        ))}
+    <>
+      <Head>
+        <title>Simply Books</title>
+      </Head>
+      <div className="text-center my-4">
+        <Link href="/book/new" passHref>
+          <Button>Add A Book</Button>
+        </Link>
+        <div className="d-flex flex-wrap">
+          {/* TODO: map over books here using BookCard component */}
+          {books.map((book) => (
+            <BookCard key={book.firebaseKey} bookObj={book} onUpdate={getAllTheBooks} />
+          ))}
+        </div>
       </div>
-
-    </div>
+    </>
   );
 }
 
